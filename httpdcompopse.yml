@@ -3,7 +3,7 @@ services:
   web:
     image: httpd:latest
     deploy:
-      replicas: 5
+      replicas: 2
       resources:
         limits:
           cpus: "0.1"
@@ -11,7 +11,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "4000:80"
+      - "4040:80"
     networks:
       - webnet
 networks:
