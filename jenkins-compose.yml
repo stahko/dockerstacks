@@ -1,0 +1,13 @@
+version: "3"
+services:
+  jbo:
+    image: jenkins/jenkins:lts
+    volumes:
+      - jbo_data:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    deploy:
+      replicas: 2
+volumes:
+  jbo_data:
