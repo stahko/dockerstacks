@@ -1,6 +1,0 @@
-version: "2"
-services:
-  httpdservice:
-    image: httpd:latest
-    ports:
-      - "4000:80"

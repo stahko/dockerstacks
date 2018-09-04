@@ -1,0 +1,18 @@
+version: '3'
+services:
+  dokuwiki:
+    image: 'bitnami/dokuwiki:latest'
+    ports:
+      - '8081:80'
+      - '4433:443'
+    volumes:
+      - 'dokuwiki_data:/bitnami'
+    environment:
+      - DOKUWIKI_USERNAME=admin
+      - DOKUWIKI_PASSWORD=admin
+      - DOKUWIKI_WIKI_NAME=mywiki
+    deploy:
+      restart_policy:
+        condition: none
+volumes:
+  dokuwiki_data:
