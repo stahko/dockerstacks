@@ -1,0 +1,27 @@
+version: '3'
+services:
+  clickhouse:
+    image: yandex/clickhouse-server
+    networks:
+      - clickhouse_net
+    ports:
+      - 8123:8123
+      - 9000:9000
+      - 9009:9009
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+  tabix:
+    image: spoonest/clickhouse-tabix-web-client
+    networks:
+      - clickhouse_net
+    ports:
+      - 8124:80
+    environment:
+      - CH_NAME=Datamine
+      - CH_HOST=datamine00.ev.local:8123
+      - CH_LOGIN=default
+networks:
+  clickhouse_net:
+volumes:
+  clickhouse_data:
+  
