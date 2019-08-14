@@ -12,6 +12,8 @@ services:
     configs:
       - source: prometheus_yml
         target: /etc/prometheus/prometheus.yml
+    volumes:
+      - 'data:/prometheus'  
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
@@ -22,7 +24,22 @@ services:
     - /var/run:/var/run:rw
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
-
+  grafana:
+    image: grafana/grafana
+    environment:
+      GF_SERVER_ROOT_URL: http://latitude.local
+      GF_SECURITY_ADMIN_PASSWORD: secret
+    ports:
+      - 3030:3000
+    depends_on:
+    - prometheus     
+    volumes:
+      - 'data_grafana:/var/lib/grafana'     
 configs:
   prometheus_yml:
     external: true
+
+volumes:
+  data:
+  data_grafana:
+
